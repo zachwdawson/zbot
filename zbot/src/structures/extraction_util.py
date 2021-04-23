@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-from player import Player
-from hand import Hand
-from action_type import ActionType
-from action import Action
-from decision import Decision
-from stage import Stage
+from src.structures.player import Player
+from src.structures.hand import Hand
+from src.structures.action_type import ActionType
+from src.structures.action import Action
+from src.structures.decision import Decision
+from src.structures.stage import Stage
 from typing import List, Dict
 import pandas as pd
 import eval7

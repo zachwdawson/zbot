@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from action_type import ActionType
+from src.structures.action_type import ActionType
 
 class Action(object):
     

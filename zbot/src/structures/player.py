@@ -1,7 +1,7 @@
 from eval7 import Card
 from typing import Tuple, Dict
-from action import Action
-from stage import Stage
+from src.structures.action import Action
+from src.structures.stage import Stage
 
 
 
