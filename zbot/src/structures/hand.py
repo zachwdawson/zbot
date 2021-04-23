@@ -1,7 +1,7 @@
 from eval7 import Card
 from typing import Tuple, Dict, List
-from action import Action
-from player import Player
+from src.structures.action import Action
+from src.structures.player import Player
 
 
 class Hand(object):

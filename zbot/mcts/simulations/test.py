@@ -10,9 +10,10 @@ from rlcard.utils import Logger
 # Make environment
 env = rlcard.make('limit-holdem', config={'seed': 0})
 eval_env = rlcard.make('limit-holdem', config={'seed': 10})
-episode_num = 1000
-evaluate_every = 100
-evaluate_num = 1000
+episode_num = 5
+# episode_num = 1000
+# evaluate_every = 100
+# evaluate_num = 1000
 
 log_dir = '/Users/zacharydawson/artificial-intelligence/poker/data/simulation_outputs'
 logger = Logger(log_dir)
@@ -32,9 +33,11 @@ for episode in range(episode_num):
     # Generate data from the environment
     trajectories, _ = env.run(is_training=True)
 
+    # print(trajectories)
+
     # Evaluate the performance. Play with random agents.
-    if episode % evaluate_every == 0:
-        logger.log_performance(env.timestep, tournament(eval_env, evaluate_num)[0])
+    # if episode % evaluate_every == 0:
+    #     logger.log_performance(env.timestep, tournament(eval_env, evaluate_num)[0])
 
 # Close files in the logger
 logger.close_files()

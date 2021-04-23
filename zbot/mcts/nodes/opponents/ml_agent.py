@@ -1,4 +1,4 @@
-from mcts.nodes.opponent_node import Opponent
+from mcts.nodes.old_files.opponent_node import Opponent
 from mcts.nodes.node import Node
 
 

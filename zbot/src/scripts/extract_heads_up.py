@@ -6,12 +6,12 @@ import re
 import eval7
 import sys
 sys.path.append('/Users/zacharydawson/artificial-intelligence/poker/zbot/src/structures')
-from player import Player
-from hand import Hand
-from action_type import ActionType
-from action import Action
-from decision import Decision
-from stage import Stage
+from src.structures.player import Player
+from src.structures.hand import Hand
+from src.structures.action_type import ActionType
+from src.structures.action import Action
+from src.structures.decision import Decision
+from src.structures.stage import Stage
 import logging
 import traceback
 import os
@@ -26,7 +26,7 @@ pre_flop = []
 post_flop = []
 turn = []
 river = []
-communal_cards = ""
+communal_cards = []
 
 ## Build decision dataframe
     
@@ -37,12 +37,9 @@ columns = ['target', 'stage', 'dealer', 'hand_strength', 'hand_rank', 'opp_last_
         'winning_prob','highest_card', 'num_aces', 'num_kings', 'num_queens']
 df_decision = pd.DataFrame(columns=columns)
 
-#paths = ['/Users/zacharydawson/artificial-intelligence/poker/data/hand_histories/SBvMB-9.txt',
-#         '/Users/zacharydawson/artificial-intelligence/poker/data/hand_histories/SBvMB-38.txt',
-#         '/Users/zacharydawson/artificial-intelligence/poker/data/hand_histories/SBvMB-150.txt',
-#         '/Users/zacharydawson/artificial-intelligence/poker/data/hand_histories/SBvMB-600.txt']
+paths = ['/Users/zacharydawson/artificial-intelligence/poker/data/hand_histories/SBvMB-600.txt']
 
-paths = ['/Users/zacharydawson/artificial-intelligence/poker/data/hand_histories/SBvMB-9.txt']
+# paths = ['/Users/zacharydawson/artificial-intelligence/poker/data/hand_histories/SBvMB-9.txt']
 #         '/Users/zacharydawson/artificial-intelligence/poker/data/hand_histories/SBvMB-38.txt',
 #         '/Users/zacharydawson/artificial-intelligence/poker/data/hand_histories/SBvMB-150.txt',
 #         '/Users/zacharydawson/artificial-intelligence/poker/data/hand_histories/SBvMB-600.txt']
@@ -67,7 +64,7 @@ for file in paths:
                 post_flop = []
                 turn = []
                 river = []
-                communal_cards = ""
+                communal_cards = []
             else:
                 if re.search('^\s*[0-9]\)', line.strip()) and 'sitting out' not in line:
                     components = line.strip().split(' ')
@@ -338,5 +335,5 @@ for file in paths:
               #              decision.winning_prob, decision.highest_card, decision.num_aces,
                #             decision.num_kings, decision.num_queens])
     
-df_decision.to_csv('/Users/zacharydawson/artificial-intelligence/poker/data/hand_histories/overnight_0.csv')
+df_decision.to_csv('/Users/zacharydawson/artificial-intelligence/poker/data/hand_histories/overnight_4.csv')
             
