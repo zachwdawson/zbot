@@ -1,7 +1,8 @@
 
 from mcts.mcts import explore
 from mcts.nodes.old_files.decision_node import Decision
-from util import eval7torlcard, rlcardtoeval7
+from util import rlcardtoeval7, action_to_num
+import numpy as np
 
 
 class MCTS_Agent(object):
@@ -21,11 +22,11 @@ class MCTS_Agent(object):
         self.dealer = False
 
         ### Hand Rank Model- maintained all from opponents point of view
-        self.stage = None
-        self.opp_num_raises_total = None
-        self.my_num_raises_total = None
-        self.prev_opp_num_raises_total = None
-        self.prev_my_num_raises_total = None
+        self.stage = 0
+        self.opp_num_raises_total = 0
+        self.my_num_raises_total = 0
+        self.prev_opp_num_raises_total = 0
+        self.prev_my_num_raises_total = 0
         self.action = None
         self.prev_action = None
         self.opp_last_action = None
@@ -49,9 +50,25 @@ class MCTS_Agent(object):
         self.update(state)
         state['im_dealer'] = self.dealer
         state['opp_hand'] = None
-        hand_rank_model = []
+        # [stage, opp_last_action, my_last_action, my_num_raises_total, opp_num_raises_total, num_aces, num_kings,
+        # num_queens, prev_action, prev_opp_last_action, prev_my_last_action, prev_my_num_raises_total,
+        # prev_opp_num_raises_total, prev_num_queens]
+        print([self.stage, self.action, self.opp_last_action,
+                                                             self.opp_num_raises_total, self.my_num_raises_total,
+                                                             self.num_aces, self.num_kings, self.num_queens,
+                                                             self.prev_action, self.prev_action,
+                                                             self.prev_opp_last_action, self.prev_opp_num_raises_total,
+                                                             self.prev_my_num_raises_total])
+        hand_rank_model = np.reshape(np.nan_to_num(np.array([self.stage, action_to_num(self.action), action_to_num(self.opp_last_action),
+                                                             self.opp_num_raises_total, self.my_num_raises_total,
+                                                             self.num_aces, self.num_kings, self.num_queens,
+                                                             action_to_num(self.prev_action), action_to_num(self.prev_action),
+                                                             action_to_num(self.prev_opp_last_action), self.prev_opp_num_raises_total,
+                                                             self.prev_my_num_raises_total], dtype=np.float)), (1, -1))
+        print(hand_rank_model)
         action, probs = explore(Decision(state), hand_rank_model)
         self.prev_state = state
+        self.action = action
         return action
 
     def eval_step(self, state):
@@ -70,16 +87,22 @@ class MCTS_Agent(object):
 
         state['im_dealer'] = self.dealer
         state['opp_hand'] = None
-        hand_rank_model = []
+        # [stage, opp_last_action, my_last_action, my_num_raises_total, opp_num_raises_total, num_aces, num_kings,
+        # num_queens, prev_action, prev_opp_last_action, prev_my_last_action, prev_my_num_raises_total,
+        # prev_opp_num_raises_total, prev_num_queens]
+        hand_rank_model = np.reshape(np.nan_to_num([self.stage, self.action, self.opp_last_action, self.opp_num_raises_total, self.my_num_raises_total,
+                           self.num_aces, self.num_kings, self.num_queens, self.prev_action, self.prev_action,
+                           self.prev_opp_last_action, self.prev_opp_num_raises_total, self.prev_my_num_raises_total]), (1,-1))
         action, probs = explore(Decision(state), hand_rank_model)
         self.prev_state = state
+        self.action = action
         return action, probs
 
     def update(self, state):
         curr_public_cards = state['public_cards']
-        prev_public_cards = self.prev_state['public_cards']
+        prev_public_cards = [] if self.prev_state is None else self.prev_state['public_cards']
         curr_hand = state['hand']
-        prev_hand = self.prev_state['hand']
+        prev_hand = [] if self.prev_state is None else self.prev_state['hand']
 
         # new hand
         if len(curr_public_cards) < len(prev_public_cards) or curr_hand != prev_hand:
@@ -102,7 +125,8 @@ class MCTS_Agent(object):
             self.stage = 4
 
         # raises
-        new_raises = state['raise_nums'] - self.prev_state['raise_nums']
+        new_raises = np.subtract(state['raise_nums'], [0,0,0,0]) if self.prev_state is None else np.subtract(state['raise_nums'], self.prev_state['raise_nums'])
+        new_raises = np.sum(new_raises)
         if self.prev_action == 'raise':
             opp_raises = new_raises - 1
         else:
@@ -143,4 +167,3 @@ class MCTS_Agent(object):
         self.num_kings = num_kings
         self.num_aces = num_aces
 
-        return

@@ -6,19 +6,17 @@ from util import create_opp_hand_from_rank_distribution, rlcardtoeval7, eval7tor
 from eval7 import HandRange, Card
 from eval7.equity import py_hand_vs_range_monte_carlo
 from math import inf
-from copy import deepcopy
-import sklearn.ensemble
 from joblib import load
 
+hand_rank_model = load('/Users/zacharydawson/artificial-intelligence/poker/zbot/notebooks/random_forest.joblib')
 
 def explore(root: Node, hand_rank_model_instance, duration: float = 0.5, exploration: float = 1):
 
     start_time = datetime.now()
 
     while (datetime.now() - start_time).total_seconds() < duration:
-        hand_rank_model = load('/Users/zacharydawson/artificial-intelligence/poker/zbot/notebooks/random_forest.joblib')
-        opp_hand_rank_probas = hand_rank_model.predict_proba(hand_rank_model_instance)
-        opp_hand_rank_probs = [1, 0, 0, 0, 0, 0]
+        opp_hand_rank_probs = hand_rank_model.predict_proba(hand_rank_model_instance)
+        # opp_hand_rank_probs = [1, 0, 0, 0, 0, 0]
 
         opp_hand = create_opp_hand_from_rank_distribution(opp_hand_rank_probs,
                                                           list(map(rlcardtoeval7, root.state['public_cards'])),
