@@ -53,19 +53,12 @@ class MCTS_Agent(object):
         # [stage, opp_last_action, my_last_action, my_num_raises_total, opp_num_raises_total, num_aces, num_kings,
         # num_queens, prev_action, prev_opp_last_action, prev_my_last_action, prev_my_num_raises_total,
         # prev_opp_num_raises_total, prev_num_queens]
-        print([self.stage, self.action, self.opp_last_action,
-                                                             self.opp_num_raises_total, self.my_num_raises_total,
-                                                             self.num_aces, self.num_kings, self.num_queens,
-                                                             self.prev_action, self.prev_action,
-                                                             self.prev_opp_last_action, self.prev_opp_num_raises_total,
-                                                             self.prev_my_num_raises_total])
         hand_rank_model = np.reshape(np.nan_to_num(np.array([self.stage, action_to_num(self.action), action_to_num(self.opp_last_action),
                                                              self.opp_num_raises_total, self.my_num_raises_total,
                                                              self.num_aces, self.num_kings, self.num_queens,
                                                              action_to_num(self.prev_action), action_to_num(self.prev_action),
                                                              action_to_num(self.prev_opp_last_action), self.prev_opp_num_raises_total,
                                                              self.prev_my_num_raises_total], dtype=np.float)), (1, -1))
-        print(hand_rank_model)
         action, probs = explore(Decision(state), hand_rank_model)
         self.prev_state = state
         self.action = action
@@ -90,9 +83,12 @@ class MCTS_Agent(object):
         # [stage, opp_last_action, my_last_action, my_num_raises_total, opp_num_raises_total, num_aces, num_kings,
         # num_queens, prev_action, prev_opp_last_action, prev_my_last_action, prev_my_num_raises_total,
         # prev_opp_num_raises_total, prev_num_queens]
-        hand_rank_model = np.reshape(np.nan_to_num([self.stage, self.action, self.opp_last_action, self.opp_num_raises_total, self.my_num_raises_total,
-                           self.num_aces, self.num_kings, self.num_queens, self.prev_action, self.prev_action,
-                           self.prev_opp_last_action, self.prev_opp_num_raises_total, self.prev_my_num_raises_total]), (1,-1))
+        hand_rank_model = np.reshape(np.nan_to_num(np.array([self.stage, action_to_num(self.action), action_to_num(self.opp_last_action),
+                                                             self.opp_num_raises_total, self.my_num_raises_total,
+                                                             self.num_aces, self.num_kings, self.num_queens,
+                                                             action_to_num(self.prev_action), action_to_num(self.prev_action),
+                                                             action_to_num(self.prev_opp_last_action), self.prev_opp_num_raises_total,
+                                                             self.prev_my_num_raises_total], dtype=np.float)), (1, -1))
         action, probs = explore(Decision(state), hand_rank_model)
         self.prev_state = state
         self.action = action
