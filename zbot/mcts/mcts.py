@@ -34,7 +34,10 @@ def explore(root: Node, opp_hand_rank_probs, duration: float = 1.0, exploration:
             max_val = child.ev/child.num_visits
 
     prob_sum = sum([prob[1] for prob in probs])
-    probs = [(prob[0], prob[1]/prob_sum) for prob in probs]
+    if prob_sum == 0:
+        probs = [(prob[0], prob[1]) for prob in probs]
+    else:
+        probs = [(prob[0], prob[1]/prob_sum) for prob in probs]
 
     return action, probs
 
