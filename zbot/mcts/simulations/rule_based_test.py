@@ -5,6 +5,20 @@ from rlcard.models import limitholdem_rule_models
 from rlcard.utils import set_global_seed, tournament
 from mcts.mcts_agent import MCTS_Agent
 from rlcard.utils import Logger
+import argparse
+
+parser = argparse.ArgumentParser(description='MCTS values')
+parser.add_argument('-d', metavar='duration', type=float, action='store',
+                    help='duration for agent to search')
+parser.add_argument('-e', metavar='explore', type=float,
+                    help='exploration parameter')
+parser.add_argument('-n', metavar='name', type=str,
+                    help='name for output dir')
+
+args = parser.parse_args()
+name = args.n
+duration = args.d
+explore = args.e
 
 # Make environment
 env = rlcard.make('limit-holdem', config={'seed': 0})
@@ -14,7 +28,7 @@ episode_num = 1000
 evaluate_every = 100
 evaluate_num = 1000
 
-log_dir = '/Users/zacharydawson/artificial-intelligence/poker/data/simulation_outputs/rules1sec'
+log_dir = name
 logger = Logger(log_dir)
 
 
@@ -23,7 +37,7 @@ set_global_seed(0)
 
 # Set up agents
 agent1 = limitholdem_rule_models.LimitholdemRuleAgentV1()
-agent2 = MCTS_Agent(action_num=env.action_num)
+agent2 = MCTS_Agent(action_num=env.action_num, duration=duration, exploration=explore)
 env.set_agents([agent1, agent2])
 eval_env.set_agents([agent1, agent2])
 

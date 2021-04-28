@@ -9,7 +9,7 @@ class MCTS_Agent(object):
     ''' A random agent. Random agents is for running toy examples on the card games
     '''
 
-    def __init__(self, action_num):
+    def __init__(self, action_num, duration, exploration):
         ''' Initilize the random agent
 
         Args:
@@ -20,6 +20,8 @@ class MCTS_Agent(object):
         self.prev_state = None
         self.hand = None
         self.dealer = False
+        self.duration = duration
+        self.exploration = exploration
 
         ### Hand Rank Model- maintained all from opponents point of view
         self.stage = 0
@@ -59,7 +61,7 @@ class MCTS_Agent(object):
                                                              action_to_num(self.prev_action), action_to_num(self.prev_action),
                                                              action_to_num(self.prev_opp_last_action), self.prev_opp_num_raises_total,
                                                              self.prev_my_num_raises_total], dtype=np.float)), (1, -1))
-        action, probs = explore(Decision(state), hand_rank_model)
+        action, probs = explore(Decision(state), hand_rank_model, duration=self.duration, exploration=self.exploration)
         self.prev_state = state
         self.action = action
         return action
