@@ -21,6 +21,24 @@ def action_to_num(action):
     else:
         return 0
 
+def hand_rank_to_num(rank):
+        if rank is None:
+            return 0
+        elif rank == 'High Card':
+            return 0
+        elif rank == 'Pair':
+            return 1
+        elif rank == 'Two Pair':
+            return 2
+        elif rank == 'Trips':
+            return 3
+        elif rank == 'Straight':
+            return 4
+        elif rank == 'Flush':
+            return 5
+        else:
+            return 6
+
 def create_opp_hand_from_rank_distribution(opp_hand_rank_probas, public_cards, my_hand):
     deck = Deck()
     potential_hands = []

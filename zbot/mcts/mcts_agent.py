@@ -1,7 +1,7 @@
 
 from mcts.mcts import explore
 from mcts.nodes.old_files.decision_node import Decision
-from util import rlcardtoeval7, action_to_num, calc_num_outs, calc_win_prob
+from util import rlcardtoeval7, action_to_num, hand_rank_to_num, calc_num_outs, calc_win_prob
 import numpy as np
 import pandas as pd
 from joblib import load
@@ -122,7 +122,7 @@ class MCTS_Agent(object):
         # prev_hand_strength, prev_opp_last_action, prev_my_last_action, prev_my_num_raises_total,
         # prev_opp_num_raises_total, prev_num_outs, prev_winning_prob, prev_highest_card]
         action_model_probs = self.model_action.predict_proba(np.reshape(np.nan_to_num(np.array([self.dealer, self.hand_strength,
-                                                                                              self.hand_rank, action_to_num(self.opp_last_action),
+                                                                                              hand_rank_to_num(self.hand_rank), action_to_num(self.opp_last_action),
                                                                                               action_to_num(self.my_last_action), self.my_stack_committed_curr_phase,
                                                                                               self.opp_stack_committed_curr_phase,
                                                                                               self.opp_num_raises_curr_phase, self.num_outs, self.winning_prob,
