@@ -69,7 +69,7 @@ for i in range(num_tournaments):
 # Close files in the logger
 logger.close_files()
 
-pd.to_csv(agent2.action_df, os.path.join(log_dir, 'action.csv'))
+pd.DataFrame.to_csv(agent2.action_df, os.path.join(log_dir, 'action.csv'))
 
 # Plot the learning curve
 logger.plot(name)
