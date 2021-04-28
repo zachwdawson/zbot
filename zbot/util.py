@@ -58,7 +58,6 @@ def create_opp_hand_from_rank_distribution(opp_hand_rank_probas, public_cards, m
 
 def calc_num_outs(curr_hand):
     # no outs pre flop
-    deck = Deck()
     if len(curr_hand) == 2:
         return 0
 
