@@ -1,7 +1,7 @@
 
 from mcts.mcts import explore
 from mcts.nodes.old_files.decision_node import Decision
-from util import rlcardtoeval7, action_to_num, hand_rank_to_num, calc_num_outs, calc_win_prob
+from util import rlcardtoeval7, eval7torlcard, action_to_num, hand_rank_to_num, calc_num_outs, calc_win_prob
 import numpy as np
 import pandas as pd
 from joblib import load
@@ -272,7 +272,7 @@ class MCTS_Agent(object):
             elif 'Q' in str(card):
                 num_queens += 1
         self.prev_highest_card = self.highest_card
-        self.highest_card = highest_card
+        self.highest_card = highest_card.rank
         self.num_queens = num_queens
         self.num_kings = num_kings
         self.num_aces = num_aces
