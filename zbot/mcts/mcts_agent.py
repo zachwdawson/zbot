@@ -121,6 +121,16 @@ class MCTS_Agent(object):
         # opp_stack_committed_curr_phase, opp_num_raises_curr_phase, num_outs, winning_prob, highest_card, prev_action,
         # prev_hand_strength, prev_opp_last_action, prev_my_last_action, prev_my_num_raises_total,
         # prev_opp_num_raises_total, prev_num_outs, prev_winning_prob, prev_highest_card]
+        print([self.dealer * 1, self.hand_strength,
+              hand_rank_to_num(self.hand_rank), action_to_num(self.opp_last_action),
+              action_to_num(self.my_last_action), self.my_stack_committed_curr_phase,
+              self.opp_stack_committed_curr_phase,
+              self.opp_num_raises_curr_phase, self.num_outs, self.winning_prob,
+              self.highest_card, action_to_num(self.prev_action),
+              self.prev_hand_strength, action_to_num(self.prev_opp_last_action),
+              action_to_num(self.prev_my_last_action), self.prev_my_num_raises_total,
+              self.prev_opp_num_raises_total, self.prev_num_outs,
+              self.prev_winning_prob, self.prev_highest_card])
         action_model_probs = self.model_action.predict_proba(np.reshape(np.nan_to_num(np.array([self.dealer * 1, self.hand_strength,
                                                                                               hand_rank_to_num(self.hand_rank), action_to_num(self.opp_last_action),
                                                                                               action_to_num(self.my_last_action), self.my_stack_committed_curr_phase,
