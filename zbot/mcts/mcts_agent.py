@@ -272,7 +272,7 @@ class MCTS_Agent(object):
             elif 'Q' in str(card):
                 num_queens += 1
         self.prev_highest_card = self.highest_card
-        self.highest_card = highest_card.rank
+        self.highest_card = None if highest_card is None else highest_card.rank
         self.num_queens = num_queens
         self.num_kings = num_kings
         self.num_aces = num_aces
