@@ -136,12 +136,12 @@ class MCTS_Agent(object):
         print(self.action_df)
         print(action_model_probs)
         print(mcts_probs)
-        self.action_df.loc[len(self.action_df.index)] = [action_model_probs[2],
-                                                         action_model_probs[1],
-                                                         action_model_probs[0],
-                                                         mcts_probs[2],
-                                                         mcts_probs[1],
-                                                         mcts_probs[0]]
+        self.action_df.loc[len(self.action_df.index)] = [action_model_probs[0][2],
+                                                         action_model_probs[0][1],
+                                                         action_model_probs[0][0],
+                                                         mcts_probs[2][1],
+                                                         mcts_probs[1][1],
+                                                         mcts_probs[0][1]]
         return action, eval_probs
 
     def update(self, state):
