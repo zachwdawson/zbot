@@ -133,6 +133,7 @@ class MCTS_Agent(object):
                                                                                               self.prev_winning_prob, self.prev_highest_card], dtype=np.float)), (1,-1)))
 
         mcts_probs = sorted(mcts_probs, key=lambda x: x[0])
+        print(self.action_df)
         self.action_df.loc[len(self.action_df.index)] = [action_model_probs[2],
                                                          action_model_probs[1],
                                                          action_model_probs[0],
