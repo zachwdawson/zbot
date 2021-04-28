@@ -146,10 +146,11 @@ class MCTS_Agent(object):
         print(self.action_df)
         print(action_model_probs)
         print(mcts_probs)
+        mcts_prob_raise = 0 if len(mcts_probs) < 3 else mcts_probs[2][1]
         self.action_df.loc[len(self.action_df.index)] = [action_model_probs[0][2],
                                                          action_model_probs[0][1],
                                                          action_model_probs[0][0],
-                                                         mcts_probs[2][1],
+                                                         mcts_prob_raise,
                                                          mcts_probs[1][1],
                                                          mcts_probs[0][1]]
         return action, eval_probs
