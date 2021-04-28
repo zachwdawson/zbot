@@ -187,7 +187,7 @@ class MCTS_Agent(object):
                 self.dealer = False
 
         # hand
-        full_hand = map(rlcardtoeval7, curr_hand + curr_public_cards)
+        full_hand = list(map(rlcardtoeval7, curr_hand + curr_public_cards))
         eval7_strength = eval7.evaluate(full_hand)
         self.prev_hand_strength = self.hand_strength
         self.hand_strength = eval7_strength / MAX_EVAL_HS # scales to between 0 and 1. Needed for P(win)
@@ -195,7 +195,7 @@ class MCTS_Agent(object):
         self.prev_num_outs = self.num_outs
         self.num_outs = calc_num_outs(full_hand)
         self.prev_winning_prob = self.winning_prob
-        self.winning_prob = calc_win_prob(map(rlcardtoeval7, curr_public_cards), map(rlcardtoeval7, curr_hand), self.num_outs)
+        self.winning_prob = calc_win_prob(list(map(rlcardtoeval7, curr_public_cards)), list(map(rlcardtoeval7, curr_hand)), self.num_outs)
 
         # stage
         if len(curr_public_cards) == 0:
