@@ -2,20 +2,16 @@ from mcts.nodes.node import Node, Chance
 from datetime import datetime
 from random import choice
 import math
-from util import create_opp_hand_from_rank_distribution, rlcardtoeval7, eval7torlcard
+from util import create_opp_hand_from_rank_distribution, rlcardtoeval7, eval7torlcard, action_to_num
 from eval7 import HandRange, Card
 from eval7.equity import py_hand_vs_range_monte_carlo
 from math import inf
-from joblib import load
 
-hand_rank_model = load('/Users/zacharydawson/artificial-intelligence/poker/zbot/notebooks/random_forest.joblib')
-
-def explore(root: Node, hand_rank_model_instance, duration: float = 1.0, exploration: float = 1):
+def explore(root: Node, opp_hand_rank_probs, duration: float = 1.0, exploration: float = 1):
 
     start_time = datetime.now()
 
     while (datetime.now() - start_time).total_seconds() < duration:
-        opp_hand_rank_probs = hand_rank_model.predict_proba(hand_rank_model_instance)
 
         opp_hand = create_opp_hand_from_rank_distribution(opp_hand_rank_probs,
                                                           list(map(rlcardtoeval7, root.state['public_cards'])),
@@ -32,7 +28,7 @@ def explore(root: Node, hand_rank_model_instance, duration: float = 1.0, explora
     probs=[]
     for child in root.children:
         prob = 0 if child.num_visits == 0 else child.ev/child.num_visits
-        probs.append(prob)
+        probs.append((action_to_num(child.prev_action),prob))
         if prob > max_val:
             action = child.prev_action
             max_val = child.ev/child.num_visits
