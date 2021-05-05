@@ -65,8 +65,7 @@ with tf.Session() as sess:
                      train_every=train_every,
                      state_shape=env.state_shape,
                      mlp_layers=[512, 512])
-    mcts_agent = MCTS_Agent(action_num=env.action_num, duration=duration, exploration=explore,
-                    model_action=model_action, model_hand_rank=model_hand_rank)
+    mcts_agent = MCTS_Agent(env.action_num, duration, explore, model_action, model_hand_rank)
     env.set_agents([mcts_agent, dqn_agent])
     eval_env.set_agents([mcts_agent, dqn_agent])
 
