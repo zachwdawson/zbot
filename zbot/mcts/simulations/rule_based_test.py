@@ -35,7 +35,7 @@ eval_env = rlcard.make('limit-holdem', config={'seed': 10})
 num_tournaments = 25
 # episode_num = 100
 # evaluate_every = 10
-evaluate_num = 100
+evaluate_num = 1000
 
 log_dir = name
 logger = Logger(log_dir)

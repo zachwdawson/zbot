@@ -1,0 +1,138 @@
+/home/dawson.z/.conda/envs/zbotenv/lib/python3.7/site-packages/sklearn/utils/deprecation.py:143: FutureWarning: The sklearn.ensemble.forest module is  deprecated in version 0.22 and will be removed in version 0.24. The corresponding classes / functions should instead be imported from sklearn.ensemble. Anything that cannot be imported from sklearn.ensemble is now part of the private API.
+  warnings.warn(message, FutureWarning)
+/home/dawson.z/.conda/envs/zbotenv/lib/python3.7/site-packages/sklearn/utils/deprecation.py:143: FutureWarning: The sklearn.tree.tree module is  deprecated in version 0.22 and will be removed in version 0.24. The corresponding classes / functions should instead be imported from sklearn.tree. Anything that cannot be imported from sklearn.tree is now part of the private API.
+  warnings.warn(message, FutureWarning)
+/home/dawson.z/.conda/envs/zbotenv/lib/python3.7/site-packages/sklearn/base.py:334: UserWarning: Trying to unpickle estimator DecisionTreeClassifier from version 0.21.3 when using version 0.23.2. This might lead to breaking code or invalid results. Use at your own risk.
+  UserWarning)
+/home/dawson.z/.conda/envs/zbotenv/lib/python3.7/site-packages/sklearn/base.py:334: UserWarning: Trying to unpickle estimator RandomForestClassifier from version 0.21.3 when using version 0.23.2. This might lead to breaking code or invalid results. Use at your own risk.
+  UserWarning)
+/home/dawson.z/.conda/envs/zbotenv/lib/python3.7/site-packages/sklearn/utils/deprecation.py:143: FutureWarning: The sklearn.metrics.scorer module is  deprecated in version 0.22 and will be removed in version 0.24. The corresponding classes / functions should instead be imported from sklearn.metrics. Anything that cannot be imported from sklearn.metrics is now part of the private API.
+  warnings.warn(message, FutureWarning)
+/home/dawson.z/.conda/envs/zbotenv/lib/python3.7/site-packages/sklearn/base.py:334: UserWarning: Trying to unpickle estimator GridSearchCV from version 0.21.3 when using version 0.23.2. This might lead to breaking code or invalid results. Use at your own risk.
+  UserWarning)
+
+----------------------------------------
+  timestep     |  0
+  reward       |  0.0775
+----------------------------------------
+
+----------------------------------------
+  timestep     |  10
+  reward       |  0.0565
+----------------------------------------
+
+----------------------------------------
+  timestep     |  20
+  reward       |  0.09
+----------------------------------------
+
+----------------------------------------
+  timestep     |  30
+  reward       |  0.0075
+----------------------------------------
+
+----------------------------------------
+  timestep     |  40
+  reward       |  0.2025
+----------------------------------------
+
+----------------------------------------
+  timestep     |  50
+  reward       |  0.0625
+----------------------------------------
+
+----------------------------------------
+  timestep     |  60
+  reward       |  0.147
+----------------------------------------
+
+----------------------------------------
+  timestep     |  70
+  reward       |  0.0725
+----------------------------------------
+
+----------------------------------------
+  timestep     |  80
+  reward       |  0.088
+----------------------------------------
+
+----------------------------------------
+  timestep     |  90
+  reward       |  0.043
+----------------------------------------
+
+----------------------------------------
+  timestep     |  100
+  reward       |  0.0435
+----------------------------------------
+
+----------------------------------------
+  timestep     |  110
+  reward       |  0.074
+----------------------------------------
+
+----------------------------------------
+  timestep     |  120
+  reward       |  0.12
+----------------------------------------
+
+----------------------------------------
+  timestep     |  130
+  reward       |  0.097
+----------------------------------------
+
+----------------------------------------
+  timestep     |  140
+  reward       |  0.108
+----------------------------------------
+
+----------------------------------------
+  timestep     |  150
+  reward       |  0.0845
+----------------------------------------
+
+----------------------------------------
+  timestep     |  160
+  reward       |  0.094
+----------------------------------------
+
+----------------------------------------
+  timestep     |  170
+  reward       |  0.173
+----------------------------------------
+
+----------------------------------------
+  timestep     |  180
+  reward       |  0.117
+----------------------------------------
+
+----------------------------------------
+  timestep     |  190
+  reward       |  0.0575
+----------------------------------------
+
+----------------------------------------
+  timestep     |  200
+  reward       |  0.0525
+----------------------------------------
+
+----------------------------------------
+  timestep     |  210
+  reward       |  0.148
+----------------------------------------
+
+----------------------------------------
+  timestep     |  220
+  reward       |  0.0905
+----------------------------------------
+
+----------------------------------------
+  timestep     |  230
+  reward       |  0.107
+----------------------------------------
+
+----------------------------------------
+  timestep     |  240
+  reward       |  0.022
+----------------------------------------
+half/performance.csv
