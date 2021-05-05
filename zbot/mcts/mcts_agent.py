@@ -52,6 +52,7 @@ class MCTS_Agent(object):
         self.num_queens = None
         self.num_kings = None
         self.num_aces = None
+        self.prev_num_aces = None
         self.hand_rank = None
         self.hand_strength = None
         self.prev_hand_strength = None
@@ -79,9 +80,9 @@ class MCTS_Agent(object):
         hand_rank_inst = np.reshape(np.nan_to_num(np.array([self.stage, action_to_num(self.action), action_to_num(self.opp_last_action),
                                                              self.opp_num_raises_total, self.my_num_raises_total,
                                                              self.num_aces, self.num_kings, self.num_queens,
-                                                             action_to_num(self.prev_action), action_to_num(self.prev_action),
-                                                             action_to_num(self.prev_opp_last_action), self.prev_opp_num_raises_total,
-                                                             self.prev_my_num_raises_total], dtype=np.float)), (1, -1))
+                                                             action_to_num(self.prev_action),action_to_num(self.prev_opp_last_action),
+                                                             self.prev_opp_num_raises_total, self.prev_my_num_raises_total,
+                                                             self.prev_num_aces], dtype=np.float)), (1, -1))
         opp_hand_rank_probs = self.model_hand_rank.predict_proba(hand_rank_inst)
         action, probs = explore(Decision(state), opp_hand_rank_probs, duration=self.duration, exploration=self.exploration)
         self.prev_state = state
@@ -121,16 +122,18 @@ class MCTS_Agent(object):
         # opp_stack_committed_curr_phase, opp_num_raises_curr_phase, num_outs, winning_prob, highest_card, prev_action,
         # prev_hand_strength, prev_opp_last_action, prev_my_last_action, prev_my_num_raises_total,
         # prev_opp_num_raises_total, prev_num_outs, prev_winning_prob, prev_highest_card]
-        action_model_probs = self.model_action.predict_proba(np.reshape(np.nan_to_num(np.array([self.dealer * 1, self.hand_strength,
+        action_model_probs = self.model_action.predict_proba(np.reshape(np.nan_to_num(np.array([self.hand_strength,
                                                                                               hand_rank_to_num(self.hand_rank), action_to_num(self.opp_last_action),
-                                                                                              action_to_num(self.my_last_action), self.my_stack_committed_curr_phase,
+                                                                                              action_to_num(self.my_last_action),
                                                                                               self.opp_stack_committed_curr_phase,
-                                                                                              self.opp_num_raises_curr_phase, self.num_outs, self.winning_prob,
+                                                                                              self.opp_num_raises_curr_phase,
+                                                                                              self.opp_num_raises_total,
+                                                                                              self.num_outs, self.winning_prob,
                                                                                               self.highest_card, action_to_num(self.prev_action),
-                                                                                              self.prev_hand_strength, action_to_num(self.prev_opp_last_action),
-                                                                                              action_to_num(self.prev_my_last_action), self.prev_my_num_raises_total,
-                                                                                              self.prev_opp_num_raises_total, self.prev_num_outs,
-                                                                                              self.prev_winning_prob, self.prev_highest_card], dtype=np.float)), (1,-1)))
+                                                                                              self.prev_dealer, self.prev_hand_strength,
+                                                                                              action_to_num(self.prev_opp_last_action), action_to_num(self.prev_my_last_action),
+                                                                                              self.prev_my_num_raises_total, self.prev_opp_num_raises_total,
+                                                                                              self.prev_num_outs, self.prev_winning_prob, self.prev_highest_card], dtype=np.float)), (1,-1)))
 
         mcts_probs = sorted(mcts_probs, key=lambda x: x[0])
         mcts_prob_raise = 0 if len(mcts_probs) < 3 else mcts_probs[2][1]
@@ -263,5 +266,6 @@ class MCTS_Agent(object):
         self.highest_card = None if highest_card is None else highest_card.rank
         self.num_queens = num_queens
         self.num_kings = num_kings
+        self.prev_num_aces = self.num_aces
         self.num_aces = num_aces
 

@@ -1,5 +1,4 @@
-''' An example of learning a Deep-Q Agent on Texas Limit Holdem
-'''
+#!/usr/bin/env python3
 
 import tensorflow as tf
 import os
@@ -10,6 +9,7 @@ from mcts.mcts_agent import MCTS_Agent
 from rlcard.utils import set_global_seed, tournament
 from rlcard.utils import Logger
 import argparse
+import pandas as pd
 
 # parse args
 parser = argparse.ArgumentParser(description='MCTS values')
@@ -100,6 +100,8 @@ with tf.Session() as sess:
     # Plot the learning curve
     logger_mcts.plot('MCTS')
     logger_nfsp.plot('NFSP')
+
+    pd.DataFrame.to_csv(mcts_agent.action_df, os.path.join(log_dir_mcts, 'action.csv'))
 
     # Save model
     save_dir = os.path.join(log_dir_nfsp, 'models/limit_holdem_nfsp')
